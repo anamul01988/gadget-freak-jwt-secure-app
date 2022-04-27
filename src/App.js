@@ -6,6 +6,8 @@ import Home from './components/Home/Home';
 import Products from './components/Products/Products';
 import UploadProducts from './components/UploadProducts/UploadProducts';
 import OrderList from './components/OrderList/OrderList';
+import Login from './components/Login/Login';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -21,14 +23,22 @@ function App() {
            <Route path="/products" element={<Products/>}></Route>
         </Routes>
         <Routes>
-           <Route path="/uploadPd" element={<UploadProducts/>}></Route>
+           <Route path="/uploadPd" element={
+               <PrivateRoute>
+                    <UploadProducts/>
+               </PrivateRoute>
+           }></Route>
         </Routes>
         <Routes>
-           <Route path="/orders" element={<OrderList/>}></Route>
+           <Route path="/orders" element={
+             <PrivateRoute>
+                 <OrderList/>
+             </PrivateRoute>
+           }></Route>
         </Routes>
-        {/* <Routes>
+        <Routes>
            <Route path="/login" element={<Login/>}></Route>
-        </Routes> */}
+        </Routes>
     </div>
   );
 }
