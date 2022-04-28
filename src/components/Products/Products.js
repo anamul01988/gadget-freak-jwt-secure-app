@@ -1,7 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import auth from "../../Firebase.init";
+
+
+
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [user, loading, error] = useAuthState(auth);
@@ -26,8 +31,8 @@ const Products = () => {
       },
     })
       .then((response) => response.json())
-      .then((json) =>{
-          console.log(json)
+      .then((data) =>{
+        toast(data.success) //backend theke ashbe success er value
         
       });
   }
@@ -35,6 +40,8 @@ const Products = () => {
     <div className="container">
       <h2>Total products: {products.length}.</h2>
       <div className="row">
+      <ToastContainer />
+
       {products.map((pd) => (
         <div className="col-4 g-3" key={pd._id}>
           <div class="card" >
